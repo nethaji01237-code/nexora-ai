@@ -31,3 +31,12 @@ def test_unknown_endpoint():
     response = client.get("/unknown")
 
     assert response.status_code == 404
+
+def test_database_health_endpoint():
+    response = client.get("/health/db")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "status": "healthy",
+        "database": "connected",
+    }
