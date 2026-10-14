@@ -30,3 +30,17 @@ SessionLocal = sessionmaker(
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
+
+def enable_vector_extension():
+    from sqlalchemy import text
+
+    with engine.begin() as connection:
+        connection.execute(
+            text("CREATE EXTENSION IF NOT EXISTS vector")
+        )
+        connection.execute(
+            text(
+                "ALTER TABLE document_chunks "
+                "ADD COLUMN IF NOT EXISTS embedding vector(384)"
+            )
+        )

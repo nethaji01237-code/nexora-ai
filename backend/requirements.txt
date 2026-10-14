@@ -5,3 +5,7 @@ pytest
 httpx
 psycopg[binary]
 sqlalchemy
+python-multipart
+pypdf
+sentence-transformers
+pgvector
